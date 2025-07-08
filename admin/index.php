@@ -29,12 +29,10 @@
         <nav id="menu" class="hidden md:flex space-x-4">
           <a href="#"
             class="text-gray-700 hover:text-pink-700 focus:ring-2 focus:ring-pink-500 rounded">Home</a>
-          <a href=""
-            class="text-gray-700 hover:text-pink-700 focus:ring-2 focus:ring-pink-500 rounded">Menu</a>
+          
           <a href="#"
-            class="text-gray-700 hover:text-pink-700 focus:ring-2 focus:ring-pink-500 rounded">Order</a>
-          <a href="#"
-            class="text-gray-700 hover:text-pink-700 focus:ring-2 focus:ring-pink-500 rounded">Contact</a>
+            class="text-gray-700 hover:text-pink-700 focus:ring-2 focus:ring-pink-500 rounded">Orders</a>
+          
         </nav>
       </div>
 
@@ -42,12 +40,10 @@
       <nav id="mobile-menu" class="md:hidden px-4 pb-4 hidden space-y-2">
         <a href="#"
           class="block text-gray-700 hover:text-pink-700 focus:ring-2 focus:ring-pink-500 rounded">Home</a>
-        <a href="#"
-          class="block text-gray-700 hover:text-pink-700 focus:ring-2 focus:ring-pink-500 rounded">Menu</a>
+        
         <a href="# "
-          class="block text-gray-700 hover:text-pink-700 focus:ring-2 focus:ring-pink-500 rounded">Order</a>
-        <a href="#"
-          class="block text-gray-700 hover:text-pink-700 focus:ring-2 focus:ring-pink-500 rounded">Contact</a>
+          class="block text-gray-700 hover:text-pink-700 focus:ring-2 focus:ring-pink-500 rounded">Orders</a>
+       
       </nav>
     </header>
   </nav>
