@@ -12,8 +12,9 @@
   <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
 
     <div class="  bg-white border-2 p-20 mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+    
       <div class="border-2 sm:mx-auto sm:w-full sm:max-w-sm">
-        <h2 class="  text-center text-2xl/9 font-bold tracking-tight text-gray-900">Admin Login</h2>
+        <h2 class="  text-center text-2xl/9 font-bold tracking-tight text-gray-900">Jheegu Cake - Admin Login</h2>
       </div>
 
       <!-- form -->
@@ -29,6 +30,7 @@
 
         <?php  }
         ?>
+        
         <div>
           <label for="email" class="block text-sm/6 font-medium text-gray-900">Email address</label>
           <div class="mt-2">
