@@ -12,7 +12,7 @@
     <header class="bg-white shadow">
       <div
         class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-        <h1 class="text-2xl font-bold text-pink-700"><a href="index.html">Jheegu
+        <h1 class="text-2xl font-bold text-pink-700"><a href="index.php">Jheegu
             Cake</a></h1>
 
         <!-- Hamburger Button (visible on small screens) -->
