@@ -65,7 +65,7 @@ $path = $_GET['path'] ?? null;
         Add Product
       </a>
 
-      <a href="#" class="flex items-center px-6 py-3 text-gray-700 hover:bg-pink-100 hover:text-pink-600">
+      <a href="../adminLogin/logout-handle.php" class="flex items-center px-6 py-3 text-gray-700 hover:bg-pink-100 hover:text-pink-600">
   
         <svg class="w-5 h-5 mr-3 text-pink-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7" />
@@ -86,13 +86,38 @@ $path = $_GET['path'] ?? null;
   <!-- Mobile Menu -->
   <div id="mobileMenu" class="hidden md:hidden fixed top-16 left-0 w-64 bg-white shadow z-40">
     <nav class="space-y-1">
-      <a href="#" class="flex items-center px-6 py-3 text-gray-700 hover:bg-pink-100 hover:text-pink-600">
-        <!-- Repeat Home Icon -->
+      <a href="?path=menu" class="flex items-center px-6 py-3 text-gray-700 hover:bg-pink-100 hover:text-pink-600">
+        
         <svg class="w-5 h-5 mr-3 text-pink-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M3 9.75L12 3l9 6.75v10.5a.75.75 0 01-.75.75H3.75A.75.75 0 013 20.25V9.75z" />
           <path stroke-linecap="round" stroke-linejoin="round" d="M9 22.5v-6h6v6" />
         </svg>
         Home
+      </a>
+
+      <a href="#" class="flex items-center px-6 py-3 text-gray-700 hover:bg-pink-100 hover:text-pink-600">
+        
+        <svg class="w-5 h-5 mr-3 text-pink-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 7l9 5 9-5M3 17l9 5 9-5M3 7v10m18-10v10" />
+        </svg>
+        Orders
+      </a>
+
+      <a href="?path=add-product" class="flex items-center px-6 py-3 text-gray-700 hover:bg-pink-100 hover:text-pink-600">
+        
+        <svg class="w-5 h-5 mr-3 text-pink-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+        </svg>
+        Add Product
+      </a>
+
+      <a href="../adminLogin/logout-handle.php" class="flex items-center px-6 py-3 text-gray-700 hover:bg-pink-100 hover:text-pink-600">
+  
+        <svg class="w-5 h-5 mr-3 text-pink-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7" />
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 21V3a1 1 0 011-1h6" />
+        </svg>
+        Logout
       </a>
      
     </nav>
