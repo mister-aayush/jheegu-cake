@@ -15,7 +15,20 @@
       <div class="border-2 sm:mx-auto sm:w-full sm:max-w-sm">
         <h2 class="  text-center text-2xl/9 font-bold tracking-tight text-gray-900">Admin Login</h2>
       </div>
-      <form class="space-y-6" action="admin-login-handle.php" method="POST">
+
+      <!-- form -->
+      <form class="space-y-6" action="login-handle.php" method="POST">
+        <?php
+        $error =  $_GET['error'] ?? null;
+        if (isset($error)) { ?>
+
+          <div class="my-4">
+            <span class="bg-red-300 border-2 border-red-500 px-2 py-1 my-3 rounded-2xl">
+              <?php echo $error; ?> </span>
+          </div>
+
+        <?php  }
+        ?>
         <div>
           <label for="email" class="block text-sm/6 font-medium text-gray-900">Email address</label>
           <div class="mt-2">
