@@ -31,7 +31,7 @@ $path = $_GET['path'] ?? null;
     <nav class="mt-6">
       <a href="?path=menu" class="block py-2.5 px-6 text-gray-700 hover:bg-pink-100 hover:text-pink-600">🏠 Home</a>
       <a href="#" class="block py-2.5 px-6 text-gray-700 hover:bg-pink-100 hover:text-pink-600">📦 Orders</a>
-      <a href="?path=add-product" class="block py-2.5 px-6 text-gray-700 hover:bg-pink-100 hover:text-pink-600">📦 Add Prouct</a>
+      <a href="?path=add-product" class="block py-2.5 px-6 text-gray-700 hover:bg-pink-100 hover:text-pink-600">📦 Add Product</a>
       <a href="../adminLogin/logout-handle.php" class="block py-2.5 px-6 text-gray-700 hover:bg-pink-100 hover:text-pink-600">🚪 Logout</a>
     </nav>
   </side>
@@ -46,7 +46,7 @@ $path = $_GET['path'] ?? null;
   <div id="mobileMenu" class="hidden md:hidden absolute top-14 left-0 w-64 bg-white shadow-md z-40">
     <a href="#home" class="block py-2.5 px-6 text-gray-700 hover:bg-pink-100 hover:text-pink-600">🏠 Home</a>
     <a href="#" class="block py-2.5 px-6 text-gray-700 hover:bg-pink-100 hover:text-pink-600">📦 Orders</a>
-    <a href="#" class="block py-2.5 px-6 text-gray-700 hover:bg-pink-100 hover:text-pink-600">📦 Add Prouct</a>
+    <a href="#" class="block py-2.5 px-6 text-gray-700 hover:bg-pink-100 hover:text-pink-600">📦 Add Product</a>
     <a href="../adminLogin/logout-handle.php" class="block py-2.5 px-6 text-gray-700 hover:bg-pink-100 hover:text-pink-600">🚪 Logout</a>
   </div>
 
