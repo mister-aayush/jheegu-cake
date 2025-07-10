@@ -10,7 +10,7 @@ if($_SERVER['REQUEST_METHOD'] != 'POST'){
 $user_email = $_POST['email'];
 $user_password = $_POST['password'];
  
-include 'db-conn.php';
+include '../db-conn.php';
 
 $query = "SELECT * FROM admin  WHERE email=? AND password=?";
 $mysql_stmt =  mysqli_prepare($conn,  $query);

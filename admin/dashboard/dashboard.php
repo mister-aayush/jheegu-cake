@@ -4,7 +4,7 @@ session_start();
 $is_LoggedIn =  $_SESSION['is_loggedin'] ?? false;
 
 if (!$is_LoggedIn) {
-  header("Location: login.php");
+  header("Location: ../adminLogin/login.php");
   exit();
 }
 
@@ -22,7 +22,7 @@ $path = $_GET['path'] ?? null;
 </head>
 
 <body class="bg-gray-100 min-h-screen flex">
-  `
+  
   <!DOCTYPE html>
 <html lang="en">
 <head>

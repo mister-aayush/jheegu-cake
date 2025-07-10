@@ -1,6 +1,6 @@
 
   <?php
-  include 'db-conn.php';
+  include '../db-conn.php';
     $query = "SELECT * FROM menu";
   $stmt =  mysqli_prepare($conn, $query);
 
