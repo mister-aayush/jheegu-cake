@@ -41,6 +41,7 @@
         <p class="text-gray-600 text-sm mt-2"><?php echo $item['description']?>
           <span class="hidden" id="more" > <?php echo $item['price']?></span>
         </p>
+        <button class="border-2 border-indigo-300 ">Order</button>
       </div>
       <?php endfor;
              else: ?> 
