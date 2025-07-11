@@ -10,15 +10,15 @@ $product_description = $_POST['description'];
 $price = $_POST['price'];
 $image_path = "";
 
-var_dump($_FILES);
+// var_dump($_FILES);
 echo "<pre>";
 var_dump($_POST);
 echo "</pre>";
  die;
 if(isset($product_image) && $product_image['error'] == 0){
-    $upload_dir = "uploads/";
-    $image_name = time() . '_' . basename($author_image['name']);
-    $target_path = $upload_dir . $image_name;
+    $upload_dir = "product-uploads/";
+    $image_name = time() . '_' . basename($product_image['name']);
+    $target_path = $upload_dir . $product_name;
 
     if(move_uploaded_file($author_image['tmp_name'], $target_path )){
         $image_path  = $target_path;
