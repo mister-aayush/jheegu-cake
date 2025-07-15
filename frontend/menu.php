@@ -3,9 +3,7 @@
     Occasion with a Cultural Twist</h2>
   <p class="text-lg text-gray-700 mb-6 max-w-3xl mx-auto">Delicious cakes made
     with love and tradition</p>
-  <a href="#"
-    class="bg-pink-700 text-white px-6 py-2 rounded-full hover:bg-pink-800 focus:outline-none focus:ring-2 focus:ring-pink-600">
-    Order Now</a>
+
 </section>
 <?php
 $query = "SELECT * FROM menu";
@@ -55,7 +53,9 @@ for ($i = 0; $i < mysqli_num_rows($mysqli_result); $i++) {
 
           <br>
           <?php echo $item['price'] ?><br>
-          <button class="border-2 border-indigo-300 ">Order</button>
+          <a href="#"
+            class="bg-pink-700 text-white px-6 py-2 rounded-full hover:bg-pink-800 focus:outline-none focus:ring-2 focus:ring-pink-600">
+            Order Now</a>
         </div>
       <?php endfor;
     else: ?>

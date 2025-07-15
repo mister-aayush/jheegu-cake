@@ -49,7 +49,7 @@ $path = $_GET['path'] ?? null;
         Home
       </a>
 
-      <a href="?path=add-quote" class="flex items-center px-6 py-3 text-gray-700 hover:bg-pink-100 hover:text-pink-600">
+      <a href="?path=order" class="flex items-center px-6 py-3 text-gray-700 hover:bg-pink-100 hover:text-pink-600">
         
         <svg class="w-5 h-5 mr-3 text-pink-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M3 7l9 5 9-5M3 17l9 5 9-5M3 7v10m18-10v10" />
@@ -133,6 +133,8 @@ $path = $_GET['path'] ?? null;
       <?php
       if ($path === "add-product") {
         include("add-product.php");
+      } else if($path === "order"){
+        include("orders.php");
       } else {
         include("menu.php");
       }
