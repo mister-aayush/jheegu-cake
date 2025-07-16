@@ -129,7 +129,7 @@ $path = $_GET['path'] ?? null;
   <!-- Main Content -->
   <main class="flex-1 p-6 mt-16 md:mt-0" id="home">
     <h2 class="text-2xl font-semibold mb-4 text-gray-800">Welcome, Admin 👋</h2>
-    <div class="bg-white p-6 rounded-lg shadow-md">
+    <div class=" p-6 rounded-lg shadow-md">
       <?php
       if ($path === "add-product") {
         include("add-product.php");

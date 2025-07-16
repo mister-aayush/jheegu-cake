@@ -20,7 +20,7 @@ for ($i = 0; $i < mysqli_num_rows($mysqli_result); $i++) {
 
 ?>
 <!-- Featured Cakes -->
-<section class="max-w-7xl mx-auto px-4 py-16 border-2 overflow-y-scroll">
+<section class="max-w-7xl mx-auto px-4 py-16 ">
   <h3 class="text-4xl font-extrabold text-pink-800 mb-12 text-center tracking-wide">
     Our Specialties
   </h3>
