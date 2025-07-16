@@ -32,10 +32,13 @@ for ($i = 0; $i < mysqli_num_rows($mysqli_result); $i++) {
         $item = $datas[$j];
     ?>
         <!-- Cake Card -->
-        <div class="bg-white rounded-2xl shadow p-4 ">
+        <div class="flex-col bg-white rounded-2xl shadow p-4 ">
           <img src="http://localhost:8080/Jheegu-Cake/<?php echo $item['image-url']; ?>" alt="Yomari Cake"
             class="rounded-xl mb-4 w-full h-auto object-cover" />
-          <h4 class="text-xl font-semibold text-pink-700"><?php echo $item['item-name']; ?></h4>
+          <h4 class="text-4xl font-semibold text-pink-700"><?php echo $item['item-name']; ?></h4>
+          <div class=" text-2xl text-pink-800">
+          Rs.<?php echo $item['price'] ?>
+          </div>
 
           <button
             class="text-gray-600 text-sm mt-2"
@@ -51,18 +54,17 @@ for ($i = 0; $i < mysqli_num_rows($mysqli_result); $i++) {
             <?php echo $item['description']; ?>
           </p>
 
+          
           <br>
-          <?php echo $item['price'] ?><br>
-          <a href="#"
-            class="bg-pink-700 text-white px-6 py-2 rounded-full hover:bg-pink-800 focus:outline-none focus:ring-2 focus:ring-pink-600">
-            Order Now</a>
+          <button name="order"
+            class=" bg-pink-700 text-white px-6 py-2 rounded-full hover:bg-pink-300  hover:text-black focus:outline-none  focus:ring-pink-600">
+            Order Now</button>
         </div>
       <?php endfor;
     else: ?>
 
       <p class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
-
-        okk
+      No data found!!!
       </p>
     <?php endif; ?>
 
