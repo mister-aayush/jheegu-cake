@@ -1,3 +1,7 @@
 <section>
-    <h1>This is orders</h1>
+    <?php
+    echo "<pre>";
+    var_dump($_POST);
+    echo "</pre>";
+    ?>
 </section>
