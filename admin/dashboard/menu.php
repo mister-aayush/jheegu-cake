@@ -1,9 +1,10 @@
 <?php
 
-session_start();
-if (!isset($_SESSION['admin_logged_in'])) {
-    header('Location: ../auth/login.php');
-    exit();
+$is_LoggedIn =  $_SESSION['is_loggedin'] ?? false;
+
+if (!$is_LoggedIn) {
+  header("Location: ../auth/login.php");
+  exit();
 }
 
 include '../db-conn.php';
@@ -11,7 +12,6 @@ $query = "SELECT * FROM menu";
 $stmt = mysqli_prepare($conn, $query);
 mysqli_execute($stmt);
 $mysqli_result = mysqli_stmt_get_result($stmt);
-
 $datas = [];
 while ($row = mysqli_fetch_assoc($mysqli_result)) {
   $datas[] = $row;

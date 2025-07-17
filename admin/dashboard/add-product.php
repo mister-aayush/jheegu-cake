@@ -1,9 +1,11 @@
 <?php
 
-session_start();
-if (!isset($_SESSION['admin_logged_in'])) {
-    header('Location: ../auth/login.php');
-    exit();
+
+$is_LoggedIn =  $_SESSION['is_loggedin'] ?? false;
+
+if (!$is_LoggedIn) {
+  header("Location: ../auth/login.php");
+  exit();
 }
 ?>
 
