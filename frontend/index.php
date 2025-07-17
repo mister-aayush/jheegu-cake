@@ -5,10 +5,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Jheegu Cake</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../frontend/src/output.css">
 </head>
 
-<body class="bg-pink-50 font-sans">
+<body class="bg-pink-50 font-sans flex flex-col min-h-screen">
+
 
   <nav>
     <header class="bg-white shadow">
@@ -17,7 +18,7 @@
         <h1 class="text-2xl font-bold text-pink-700"><a href="index.html">Jheegu
             Cake</a></h1>
 
-        <!-- Hamburger Button (visible on small screens) -->
+        <!-- Hamburger Button  -->
         <button id="menu-btn" aria-label="Toggle menu"
           class="md:hidden text-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-500 rounded">
           <svg class="w-6 h-6" fill="none" stroke="currentColor"
@@ -62,11 +63,48 @@
 
 
   <!-- Footer -->
-  <footer class="bg-white shadow py-6 mt-10">
-    <div class="max-w-7xl mx-auto text-center text-gray-600">
-      &copy; 2025 Jheegu Cake. All rights reserved.
+  <footer class="bg-pink-100 text-gray-800 mt-16">
+  <div class="max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-3 gap-8 text-sm">
+    
+    <!-- Contact Us -->
+    <div>
+      <h2 class="text-lg font-semibold mb-4 text-pink-900">Contact Us</h2>
+      <p>Email: <a href="mailto:info@example.com" class="text-pink-700 hover:underline">jheegucake@.com</a></p>
+      <p>Phone: +977 9808823698</p>
+      <p>Address: Gurjudhara, Kathmandu</p>
     </div>
-  </footer>
+
+    <!-- Quick Links -->
+    <div>
+      <h2 class="text-lg font-semibold mb-4 text-pink-900">Quick Links</h2>
+      <ul class="space-y-1">
+        <li><a href="#" class="hover:text-pink-700">Home</a></li>
+        <li><a href="#" class="hover:text-pink-700">About</a></li>
+        <li><a href="#" class="hover:text-pink-700">Services</a></li>
+        <li><a href="#" class="hover:text-pink-700">Products</a></li>
+        <li><a href="#" class="hover:text-pink-700">Contact</a></li>
+      </ul>
+    </div>
+
+    <!-- Follow Us -->
+    <div>
+      <h2 class="text-lg font-semibold mb-4 text-pink-900">Follow Us</h2>
+      <div class="flex space-x-4 text-xl">
+        <a href="#" class="text-pink-700 hover:text-pink-900"><i class="fab fa-facebook-f"></i>facebook</a>  
+        <a href="#" class="text-pink-700 hover:text-pink-900"><i class="fab fa-instagram"></i>Instagram</a>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Bar -->
+  <div class="bg-white text-center py-4 text-sm text-pink-700 font-semibold">
+    © 2023 Jheegu Cake. All rights reserved.
+  </div>
+</footer>
+
+
+
 
   <script>
 
@@ -79,5 +117,6 @@
   </script>
 
 </body>
+
 
 </html>

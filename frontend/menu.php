@@ -20,22 +20,25 @@ for ($i = 0; $i < mysqli_num_rows($mysqli_result); $i++) {
 
 ?>
 <!-- Featured Cakes -->
-<section class="max-w-7xl mx-auto px-4 py-16 ">
+<section class="max-w-7xl mx-auto px-4 py-16 pb-24 flex-grow">
+
   <h3 class="text-4xl font-extrabold text-pink-800 mb-12 text-center tracking-wide">
     Our Specialties
   </h3>
 
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 items-start max-h-96 ">
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 items-start">
+
     <?php if (count($datas) > 0): ?>
       <?php for ($j = 0; $j < count($datas); $j++):
         $item = $datas[$j];
       ?>
         <!-- Cake Card -->
+
         <div class="bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-shadow duration-300 p-6 flex flex-col justify-between">
           <img
-            src="http://localhost:8080/Jheegu-Cake/<?php echo $item['image-url']; ?>"
-            alt="Yomari Cake"
-            class="rounded-xl mb-4 w-full h-52 object-cover" />
+            src="http://localhost:8080/Jheegu-Cake/admin/dashboard/<?php echo $item['image-url']; ?>"
+            alt="<?php echo $item['item-name']; ?>"
+            class="w-full h-40 object-contain rounded-xl border border-pink-200 bg-white" />
 
           <h4 class="text-2xl font-bold text-pink-700 mb-2">
             <?php echo $item['item-name']; ?>
@@ -58,7 +61,7 @@ for ($i = 0; $i < mysqli_num_rows($mysqli_result); $i++) {
               '<?php echo $item['item-name']; ?>',
               '<?php echo $item['price']; ?>',
               '<?php echo $item['description']; ?>',
-              'http://localhost:8080/Jheegu-Cake/<?php echo $item['image-url']; ?>'
+              'http://localhost:8080/Jheegu-Cake/admin/dashboard<?php echo $item['image-url']; ?>'
             )"
             class="mt-auto inline-block bg-pink-700 text-white text-center px-6 py-2 rounded-full hover:bg-pink-600 hover:scale-105 transition-transform duration-300">
             Order Now
@@ -70,9 +73,11 @@ for ($i = 0; $i < mysqli_num_rows($mysqli_result); $i++) {
     <?php endif; ?>
   </div>
 
-  
+
   <!-- popup-->
-  <div id="cakeOrder" class="fixed inset-0 bg-black bg-opacity-50   items-center justify-center z-50 hidden">
+  <div id="cakeOrder" class="fixed inset-0 bg-white/30  items-center justify-center z-50 hidden">
+
+
     <div class="bg-white rounded-2xl shadow-lg w-full max-w-md p-6 relative">
 
       <!-- Close popup -->

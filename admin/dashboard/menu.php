@@ -1,46 +1,45 @@
 <?php
 include '../db-conn.php';
 $query = "SELECT * FROM menu";
-$stmt =  mysqli_prepare($conn, $query);
-
+$stmt = mysqli_prepare($conn, $query);
 mysqli_execute($stmt);
-$mysqli_result =  mysqli_stmt_get_result($stmt);
+$mysqli_result = mysqli_stmt_get_result($stmt);
 
-for ($i = 0; $i < mysqli_num_rows($mysqli_result); $i++) {
-  $data =  mysqli_fetch_assoc($mysqli_result);
-  $datas[] = $data;
+$datas = [];
+while ($row = mysqli_fetch_assoc($mysqli_result)) {
+  $datas[] = $row;
 }
-
-
 ?>
-<!-- Featured Cakes -->
-<section class="max-w-7xl mx-auto px-4 py-16">
-  <h3 class="text-4xl font-extrabold text-pink-800 mb-12 text-center tracking-wide">
-    Our Specialties
-  </h3>
 
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
-    <?php if (count($datas) > 0): ?>
-      <?php foreach ($datas as $item): ?>
-        <!-- Cake Card -->
-        <div class="bg-white rounded-2xl shadow-md p-4 hover:shadow-xl transition-shadow duration-300 text-center">
-          <img
-            src="http://localhost:8080/Jheegu-Cake/<?php echo $item['image-url']; ?>"
-            alt="<?php echo $item['item-name']; ?>"
-            class="rounded-xl w-full h-48 object-cover mb-4" />
+<h2 class="text-2xl font-bold text-pink-700 mb-6 text-center">Now in display</h2>
 
-          <h4 class="text-xl font-extrabold text-pink-800 capitalize mb-1">
-            <?php echo $item['item-name']; ?>
-          </h4>
-
-          <div class="text-lg font-semibold text-pink-800 mb-3">
-            Rs.<?php echo $item['price']; ?>
-          </div>
-      
+<?php if (!empty($datas)): ?>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-4 md:px-0">
+    <?php foreach ($datas as $item): ?>
+      <div class="bg-white rounded-xl shadow-md p-4 flex flex-col">
+        <img
+          src="http://localhost:8080/Jheegu-Cake/admin/dashboard/<?php echo $item['image-url']; ?>"
+          alt="<?php echo htmlspecialchars($item['item-name']); ?>"
+          class="w-full h-48 md:h-56 object-cover rounded-lg border border-pink-200 mb-4"
+          loading="lazy"
+        />
+        <h3 class="text-lg font-semibold text-pink-700 mb-1 capitalize break-words"><?php echo htmlspecialchars($item['item-name']); ?></h3>
+        <p class="text-pink-700 font-semibold mb-4">Rs. <?php echo htmlspecialchars($item['price']); ?></p>
+        
+        <div class="mt-auto flex flex-col sm:flex-row justify-between gap-2">
+          <a href="edit-product.php?id=<?php echo urlencode($item['id']); ?>"
+             class="flex-1 text-center bg-yellow-500 hover:bg-yellow-600 text-black py-2 rounded text-sm cursor-pointer">
+            Edit
+          </a>
+          <a href="delete-product.php?id=<?php echo urlencode($item['id']); ?>"
+             onclick="return confirm('Are you sure you want to delete this item?');"
+             class="flex-1 text-center bg-red-500 hover:bg-red-600 text-black py-2 rounded text-sm cursor-pointer">
+            Delete
+          </a>
         </div>
-      <?php endforeach; ?>
-    <?php else: ?>
-      <p class="text-center col-span-3 text-gray-500 text-lg">No data found!!!</p>
-    <?php endif; ?>
+      </div>
+    <?php endforeach; ?>
   </div>
-</section>
+<?php else: ?>
+  <p class="text-gray-500 text-sm mt-4 text-center">No menu items found.</p>
+<?php endif; ?>
