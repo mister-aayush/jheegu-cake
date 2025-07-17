@@ -1,4 +1,11 @@
 <?php
+
+session_start();
+if (!isset($_SESSION['admin_logged_in'])) {
+    header('Location: ../auth/login.php');
+    exit();
+}
+
 include '../db-conn.php';
 $query = "SELECT * FROM menu";
 $stmt = mysqli_prepare($conn, $query);
@@ -9,6 +16,7 @@ $datas = [];
 while ($row = mysqli_fetch_assoc($mysqli_result)) {
   $datas[] = $row;
 }
+
 ?>
 
 <h2 class="text-2xl font-bold text-pink-700 mb-6 text-center">Now in display</h2>

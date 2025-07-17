@@ -1,3 +1,12 @@
+<?php
+
+session_start();
+if (!isset($_SESSION['admin_logged_in'])) {
+    header('Location: ../auth/login.php');
+    exit();
+}
+?>
+
 <section class="bg-white p-6 rounded-lg shadow-md max-w-2xl mx-auto mt-6">
   <h2 class="text-xl font-semibold mb-4 text-gray-800"> Add New Product</h2>
   <form action="add-product-handle.php" method="POST"  enctype="multipart/form-data" class="space-y-4">
