@@ -72,7 +72,7 @@ for ($i = 0; $i < mysqli_num_rows($mysqli_result); $i++) {
 
   
   <!-- popup-->
-  <div id="cakeOrder" class="fixed inset-0 bg-black bg-opacity-50  flex items-center justify-center z-50 hidden">
+  <div id="cakeOrder" class="fixed inset-0 bg-black bg-opacity-50   items-center justify-center z-50 hidden">
     <div class="bg-white rounded-2xl shadow-lg w-full max-w-md p-6 relative">
 
       <!-- Close popup -->
@@ -131,6 +131,7 @@ for ($i = 0; $i < mysqli_num_rows($mysqli_result); $i++) {
 
   function openOrderPopup(id, name, price, description, imageUrl) {
     document.getElementById('cakeOrder').classList.remove('hidden');
+    document.getElementById('cakeOrder').classList.add('flex');
 
     document.getElementById('CakeId').value = id;
     document.getElementById('CakeName').value = name;
