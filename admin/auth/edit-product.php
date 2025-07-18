@@ -32,13 +32,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = "Please fill in all required fields.";
     } else {
         // Save the uploaded image
-        $uploadDir = '../dashboard/product-uploads/';
-        $image_name = basename($product_image['name']);
+        $uploadDir = '../dashboard/product-uploads';
+        $image_name = time() . '_' . basename($product_image['name']);
         $image_path = $uploadDir . $image_name;
 
-        // Move file to upload directory
         if (move_uploaded_file($product_image['tmp_name'], $image_path)) {
-            // Prepare update query (note: backticks used for hyphenated field names)
+        
             $updateQuery = "UPDATE menu SET `image-url` = ?, `item-name` = ?, `description` = ?, `price` = ? WHERE id = ?";
             $updateStmt = mysqli_prepare($conn, $updateQuery);
 

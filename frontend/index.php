@@ -32,8 +32,24 @@
         <nav id="menu" class="hidden md:flex space-x-4">
           <a href="#"
             class="text-gray-700 hover:text-pink-700 focus:ring-2 focus:ring-pink-500 rounded">Home</a>
-          <a href="#menu" 
-            class="text-gray-700 hover:text-pink-700 focus:ring-2 focus:ring-pink-500 rounded">Menu</a>
+          <button  onclick="menuPopup()"
+            class="text-gray-700 hover:text-pink-700 focus:ring-2 focus:ring-pink-500 rounded">Menu</button>
+
+          <!--menu popup-->
+          <div id="menuPopup" class="fixed inset-0 bg-white/30  items-center justify-center z-50 hidden">
+
+            <div class="bg-white rounded-2xl shadow-lg w-full max-w-md p-6 relative">
+
+              <!-- Close popup -->
+              <button onclick="closeMenupopup()" class="absolute top-3 right-4 text-2xl text-gray-600">&times;</button>
+
+
+              <img id="menuImage" src="jheegucakeMenu.jpeg" alt="menu" class=" w-full h-full ">
+
+
+            </div>
+          </div>
+
           <a href="#"
             class="text-gray-700 hover:text-pink-700 focus:ring-2 focus:ring-pink-500 rounded">Order</a>
           <a href="#"
@@ -64,53 +80,63 @@
 
   <!-- Footer -->
   <footer class="bg-pink-100 text-gray-800 mt-16">
-  <div class="max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-3 gap-8 text-sm">
-    
-    <div>
-      <h2 class="text-lg font-semibold mb-4 text-pink-900">Contact Us</h2>
-      <p>Email: <a href="mailto:info@example.com" class="text-pink-700 hover:underline">jheegucake@.com</a></p>
-      <p>Phone: +977 9808823698</p>
-      <p>Address: Gurjudhara, Kathmandu</p>
-    </div>
+    <div class="max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-3 gap-8 text-sm">
 
-    <div>
-      <h2 class="text-lg font-semibold mb-4 text-pink-900">Quick Links</h2>
-      <ul class="space-y-1">
-        <li><a href="#" class="hover:text-pink-700">Home</a></li>
-        <li><a href="#" class="hover:text-pink-700">About</a></li>
-        <li><a href="#" class="hover:text-pink-700">Services</a></li>
-        <li><a href="#" class="hover:text-pink-700">Products</a></li>
-        <li><a href="#" class="hover:text-pink-700">Contact</a></li>
-      </ul>
-    </div>
+      <div>
+        <h2 class="text-lg font-semibold mb-4 text-pink-900">Contact Us</h2>
+        <p>Email: <a href="mailto:info@example.com" class="text-pink-700 hover:underline">jheegucake@.com</a></p>
+        <p>Phone: +977 9808823698</p>
+        <p>Address: Gurjudhara, Kathmandu</p>
+      </div>
 
-    <div>
-      <h2 class="text-lg font-semibold mb-4 text-pink-900">Follow Us</h2>
-      <div class="flex space-x-4 text-xl">
-        <a href="#" class="text-pink-700 hover:text-pink-900"><i class="fab fa-facebook-f"></i>facebook</a>  
-        <a href="#" class="text-pink-700 hover:text-pink-900"><i class="fab fa-instagram"></i>Instagram</a>
+      <div>
+        <h2 class="text-lg font-semibold mb-4 text-pink-900">Quick Links</h2>
+        <ul class="space-y-1">
+          <li><a href="#" class="hover:text-pink-700">Home</a></li>
+          <li><a href="#" class="hover:text-pink-700">About</a></li>
+          <li><a href="#" class="hover:text-pink-700">Services</a></li>
+          <li><a href="#" class="hover:text-pink-700">Products</a></li>
+          <li><a href="#" class="hover:text-pink-700">Contact</a></li>
+        </ul>
+      </div>
 
+      <div>
+        <h2 class="text-lg font-semibold mb-4 text-pink-900">Follow Us</h2>
+        <div class="flex space-x-4 text-xl">
+          <a href="#" class="text-pink-700 hover:text-pink-900"><i class="fab fa-facebook-f"></i>facebook</a>
+          <a href="#" class="text-pink-700 hover:text-pink-900"><i class="fab fa-instagram"></i>Instagram</a>
+
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- Bottom Bar -->
-  <div class="bg-white text-center py-4 text-sm text-pink-700 font-semibold">
-    © 2023 Jheegu Cake. All rights reserved.
-  </div>
-</footer>
+    <!-- Bottom Bar -->
+    <div class="bg-white text-center py-4 text-sm text-pink-700 font-semibold">
+      © 2023 Jheegu Cake. All rights reserved.
+    </div>
+  </footer>
 
 
 
 
   <script>
-
     const menuBtn = document.getElementById('menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
 
     menuBtn.addEventListener('click', () => {
       mobileMenu.classList.toggle('hidden');
     });
+
+    function menuPopup(){
+      document.getElementById('menuPopup').classList.remove('hidden');
+      document.getElementById('menuPopup').classList.add('flex');
+
+    }
+
+    function closeMenupopup(){
+        document.getElementById('menuPopup').classList.add('hidden');
+        
+      }
   </script>
 
 </body>

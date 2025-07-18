@@ -61,7 +61,7 @@ for ($i = 0; $i < mysqli_num_rows($mysqli_result); $i++) {
               '<?php echo $item['item-name']; ?>',
               '<?php echo $item['price']; ?>',
               '<?php echo $item['description']; ?>',
-              'http://localhost:8080/Jheegu-Cake/admin/dashboard<?php echo $item['image-url']; ?>'
+              'http://localhost:8080/Jheegu-Cake/admin/dashboard/<?php echo $item['image-url']; ?>'
             )"
             class="mt-auto inline-block bg-pink-700 text-white text-center px-6 py-2 rounded-full hover:bg-pink-600 hover:scale-105 transition-transform duration-300">
             Order Now
@@ -84,7 +84,7 @@ for ($i = 0; $i < mysqli_num_rows($mysqli_result); $i++) {
       <button onclick="closeOrderpopup()" class="absolute top-3 right-4 text-2xl text-gray-600">&times;</button>
 
       <form action="../admin/dashboard/orders.php" method="POST">
-        <img id="cakeImage" src="" alt="Cake" class="rounded-xl w-full h-48 object-cover mb-4">
+        <img id="cakeImage" src="" alt="Cake" class="w-full h-40 object-contain rounded-xl border border-pink-200 bg-white">
         <h3 id="cakeTitle" class="text-2xl font-bold text-pink-800 mb-2"></h3>
         <div class="text-lg font-semibold text-gray-700 mb-2">
           Rs. <span id="cakePrice"></span>
