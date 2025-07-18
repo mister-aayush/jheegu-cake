@@ -32,7 +32,7 @@
         <nav id="menu" class="hidden md:flex space-x-4">
           <a href="#"
             class="text-gray-700 hover:text-pink-700 focus:ring-2 focus:ring-pink-500 rounded">Home</a>
-          <a href="menu." 
+          <a href="#menu" 
             class="text-gray-700 hover:text-pink-700 focus:ring-2 focus:ring-pink-500 rounded">Menu</a>
           <a href="#"
             class="text-gray-700 hover:text-pink-700 focus:ring-2 focus:ring-pink-500 rounded">Order</a>
@@ -66,7 +66,6 @@
   <footer class="bg-pink-100 text-gray-800 mt-16">
   <div class="max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-3 gap-8 text-sm">
     
-    <!-- Contact Us -->
     <div>
       <h2 class="text-lg font-semibold mb-4 text-pink-900">Contact Us</h2>
       <p>Email: <a href="mailto:info@example.com" class="text-pink-700 hover:underline">jheegucake@.com</a></p>
@@ -74,7 +73,6 @@
       <p>Address: Gurjudhara, Kathmandu</p>
     </div>
 
-    <!-- Quick Links -->
     <div>
       <h2 class="text-lg font-semibold mb-4 text-pink-900">Quick Links</h2>
       <ul class="space-y-1">
@@ -86,7 +84,6 @@
       </ul>
     </div>
 
-    <!-- Follow Us -->
     <div>
       <h2 class="text-lg font-semibold mb-4 text-pink-900">Follow Us</h2>
       <div class="flex space-x-4 text-xl">

@@ -35,11 +35,11 @@ while ($row = mysqli_fetch_assoc($mysqli_result)) {
         <p class="text-pink-700 font-semibold mb-4">Rs. <?php echo htmlspecialchars($item['price']); ?></p>
         
         <div class="mt-auto flex flex-col sm:flex-row justify-between gap-2">
-          <a href="edit-product.php?id=<?php echo urlencode($item['id']); ?>"
+          <a href="../auth/edit-product.php?id=<?php echo urlencode($item['id']); ?>"
              class="flex-1 text-center bg-yellow-500 hover:bg-yellow-600 text-black py-2 rounded text-sm cursor-pointer">
             Edit
           </a>
-          <a href="delete-product.php?id=<?php echo urlencode($item['id']); ?>"
+          <a href="../admin/auth/delete-product.php?id=<?php echo urlencode($item['id']); ?>"
              onclick="return confirm('Are you sure you want to delete this item?');"
              class="flex-1 text-center bg-red-500 hover:bg-red-600 text-black py-2 rounded text-sm cursor-pointer">
             Delete
