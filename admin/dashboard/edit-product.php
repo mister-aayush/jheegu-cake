@@ -14,6 +14,12 @@ mysqli_stmt_bind_param($stmt, 'i', $id);
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 
+
+// echo "<prev>";
+// echo var_dump($_POST);
+// echo "</pre>";
+// die;
+
 if (mysqli_num_rows($result) === 0) {
     die('Product not found.');
 }
@@ -29,20 +35,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $price = $_POST['price'] ?? '';
      
 
-     echo "<prev>";
-     echo var_dump($_POST);
-     echo "</pre>";
-     die;
 
     if (empty($product_image['name']) || empty($product_name) || empty($product_description) || empty($price)) {
         $error = "Please fill in all required fields.";
     } else {
         // Save the uploaded image
-        $uploadDir = '../dashboard/product-uploads';
+        $uploadDir = './product-uploads';
         $image_name = time() . '_' . basename($product_image['name']);
         $image_path = $uploadDir . $image_name;
 
-        if (move_uploaded_file($product_image['tmp_name'], $image_path)) {
+        // if (move_uploaded_file($product_image['tmp_name'], $image_path)) {
         
             $updateQuery = "UPDATE menu SET `image-url` = ?, `item-name` = ?, `description` = ?, `price` = ? WHERE id = ?";
             $updateStmt = mysqli_prepare($conn, $updateQuery);
@@ -58,9 +60,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             } else {
                 $error = "Failed to prepare update statement: " . mysqli_error($conn);
             }
-        } else {
-            $error = "Failed to upload image.";
-        }
+            
+        // } else {
+        //     $error = "Failed to upload image.";
+        // }
     }
 }
 ?>
