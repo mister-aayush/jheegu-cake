@@ -10,12 +10,7 @@ $product_description = $_POST['description'];
 $price = $_POST['price'];
 $image_path = "";
 
-// var_dump($_FILES);
-echo "<pre>";
-var_dump($_FILES);
-echo "</pre>";
 
- 
 if(isset($product_image) && $product_image['error'] == 0){
     $upload_dir = "./product-uploads/";
     $image_name = time() . '_' . basename($product_image['name']);
@@ -29,7 +24,7 @@ if(isset($product_image) && $product_image['error'] == 0){
 include '../db-conn.php';
 
 
-$query = "INSERT INTO menu (`image-url`, `item-name`, description, price) VALUES (?, ?, ?,?)";
+$query = "INSERT INTO menu where id=(`image-url`, `item-name`, description, price) VALUES (?, ?, ?,?)";
 $abc = mysqli_prepare($conn, $query);
 mysqli_stmt_bind_param($abc, "sssi", $image_path, $product_name, $product_description, $price);
 mysqli_stmt_execute($abc);

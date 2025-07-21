@@ -27,6 +27,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $product_name = $_POST['name'] ?? '';
     $product_description = $_POST['description'] ?? '';
     $price = $_POST['price'] ?? '';
+     
+
+     echo "<prev>";
+     echo var_dump($_POST);
+     echo "</pre>";
+     die;
 
     if (empty($product_image['name']) || empty($product_name) || empty($product_description) || empty($price)) {
         $error = "Please fill in all required fields.";

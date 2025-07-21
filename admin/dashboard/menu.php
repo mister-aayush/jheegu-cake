@@ -35,7 +35,7 @@ while ($row = mysqli_fetch_assoc($mysqli_result)) {
         <p class="text-pink-700 font-semibold mb-4">Rs. <?php echo htmlspecialchars($item['price']); ?></p>
         <p id="cakeDescription" class="text-black text-sm mb-4"> <?php echo htmlspecialchars($item['description']); ?></p>
         <div class="mt-auto flex flex-col sm:flex-row justify-between gap-2">
-          <a href="../auth/edit-product.php?id=<?php echo urlencode($item['id']); ?>"
+          <a href="../dashboard/edit-product.php?id=<?php echo urlencode($item['id']); ?>"
              class="flex-1 text-center bg-yellow-500 hover:bg-yellow-600 text-black py-2 rounded text-sm cursor-pointer">
             Edit
           </a>
