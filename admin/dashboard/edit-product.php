@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $image_name = time() . '_' . basename($product_image['name']);
         $image_path = $uploadDir . $image_name;
 
-        // if (move_uploaded_file($product_image['tmp_name'], $image_path)) {
+        if (move_uploaded_file($product_image['tmp_name'], $image_path)) {
         
             $updateQuery = "UPDATE menu SET `image-url` = ?, `item-name` = ?, `description` = ?, `price` = ? WHERE id = ?";
             $updateStmt = mysqli_prepare($conn, $updateQuery);
@@ -61,9 +61,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $error = "Failed to prepare update statement: " . mysqli_error($conn);
             }
             
-        // } else {
-        //     $error = "Failed to upload image.";
-        // }
+        } else {
+            $error = "Failed to upload image.";
+        }
     }
 }
 ?>

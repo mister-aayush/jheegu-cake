@@ -26,7 +26,7 @@ while ($row = mysqli_fetch_assoc($mysqli_result)) {
   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 items-start">
     <?php if (count($datas) > 0): ?>
       <?php foreach ($datas as $item): ?>
-        <div class="bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-shadow duration-300 p-6 flex flex-col justify-between">
+        <div class="bg-white rounded-2xl shadow-xl hover:0shadow-2xl transition-shadow duration-300 p-6 flex flex-col justify-between">
           <img
             src="http://localhost:8080/Jheegu-Cake/admin/dashboard/<?php echo $item['image-url']; ?>"
             alt="<?php echo $item['item-name']; ?>"
