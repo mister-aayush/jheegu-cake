@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = "Please fill in all required fields.";
     } else {
         // Save the uploaded image
-        $uploadDir = './product-uploads';
+        $uploadDir = 'product-uploads/';
         $image_name = time() . '_' . basename($product_image['name']);
         $image_path = $uploadDir . $image_name;
 

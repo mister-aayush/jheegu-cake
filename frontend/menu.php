@@ -63,7 +63,7 @@ while ($row = mysqli_fetch_assoc($mysqli_result)) {
       <!-- Close popup -->
       <button onclick="closeOrderpopup()" class="absolute top-3 right-4 text-2xl text-gray-600">&times;</button>
 
-      <div id="orderSuccessMsg" class="hidden mb-4 p-3 bg-green-100 text-green-800 rounded text-center font-semibold">
+      <div id="orderSuccessMsg" class=" hidden mb-4 p-3 bg-green-100 text-green-800 rounded text-center font-semibold">
         🎉 Your order was placed successfully!
       </div>
 
@@ -131,7 +131,7 @@ while ($row = mysqli_fetch_assoc($mysqli_result)) {
 
           <div class="flex justify-between gap-4">
             <button type="button" onclick="goToPage1()" class="w-full bg-gray-300 text-black py-2 rounded-full hover:bg-gray-400">Back</button>
-            <button type="submit" class="w-full bg-pink-700 text-white py-2 rounded-full hover:bg-pink-600">Confirm Order</button>
+            <button type="submit" onclick="alert('Order place Sucessful!');" class="w-full bg-pink-700 text-white py-2 rounded-full hover:bg-pink-600">Confirm Order</button>
           </div>
         </div>
       </form>
@@ -182,5 +182,9 @@ while ($row = mysqli_fetch_assoc($mysqli_result)) {
   function goToPage1() {
     document.getElementById('formPage2').classList.add('hidden');
     document.getElementById('formPage1').classList.remove('hidden');
+  }
+
+  function orderSuccessMsg(){
+
   }
 </script>
