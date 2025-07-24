@@ -44,7 +44,7 @@ while ($row = mysqli_fetch_assoc($mysqli_result)) {
               '<?php echo $item['item-name']; ?>',
               '<?php echo $item['price']; ?>',
               '<?php echo $item['description']; ?>',
-              'http://localhost:8080/Jheegu-Cake/admin/dashboard/<?php echo $item['image-url']; ?>'
+              'http://localhost:8080/Jheegu-Cake/admin/dashboard/<?php echo $iteem['image-url']; ?>'
             )"
             class="mt-auto inline-block bg-pink-700 text-white text-center px-6 py-2 rounded-full hover:bg-pink-600 hover:scale-105 transition-transform duration-300">
             Order Now
@@ -184,7 +184,9 @@ while ($row = mysqli_fetch_assoc($mysqli_result)) {
     document.getElementById('formPage1').classList.remove('hidden');
   }
 
-  function orderSuccessMsg(){
-
-  }
+  // function orderSuccessMsg(){
+  //       if(){
+  //         document.getElementById('orderSuccessMsg').classList.remove('hidden');
+  //       }
+  // }
 </script>
