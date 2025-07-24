@@ -121,7 +121,11 @@ while ($row = mysqli_fetch_assoc($mysqli_result)) {
           <input type="text" name="contact" required class="w-full border rounded px-3 py-2 mb-4">
 
           <label class="block text-sm font-medium text-gray-700 mb-1">Delivery date:</label>
-          <input type="date" name="customer_date" required class="w-full border rounded px-3 py-2 mb-4">
+          <input type="date" name="delivery_date" required class="w-full border rounded px-3 py-2 mb-4">
+
+          <label class="block text-sm font-medium text-gray-700 mb-1">Delivery Time:</label>
+          <input type="time" name="delivery_time" required class="w-full border border-gray-300 px-4 py-2 
+          rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500 mb-4">
 
           <label class="block text-sm font-medium text-gray-700 mb-1">Payment Method:</label>
           <select name="payment_method" required class="w-full border rounded px-3 py-2 mb-6">
