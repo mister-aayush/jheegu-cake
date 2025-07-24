@@ -2,11 +2,16 @@
 $is_LoggedIn = $_SESSION['is_loggedin'] ?? false;
 
 if (!$is_LoggedIn) {
-    header("Location: ../auth/login.php");
+    header('Location: ../../auth/login.php ');
     exit();
 }
 
-include '../db-conn.php';
+$conn = mysqli_connect("localhost", "root", "", "jheegu-cake");
+
+if($conn == false){
+    echo "Connection Failed";
+} 
+
 
 // Handle status update
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_status'])) {

@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 }
 
 // Include database connection
-include '../db-conn.php';
+include '../../db-conn.php';
 
 // Get form data and sanitize
 $pound = intval($_POST['pound'] ?? 1);

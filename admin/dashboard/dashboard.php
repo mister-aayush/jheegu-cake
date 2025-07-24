@@ -134,7 +134,7 @@ $path = $_GET['path'] ?? null;
       if ($path === "add-product") {
         include("add-product.php");
       } else if($path === "order"){
-        include("orders.php");
+        include("../dashboard/order/orders.php");
       } else {
         include("menu.php");
       }
