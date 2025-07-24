@@ -1,9 +1,9 @@
 <?php
 // Check if form was submitted via POST
-// if ($_SERVER['REQUEST_METHOD'] != 'POST') {
-//     header('Location: .../frontend/index.php');
-//     exit();
-// }
+if ($_SERVER['REQUEST_METHOD'] != 'POST') {
+    header('Location: ../../frontend/index.php');
+    exit();
+}
 
 // Include database connection
 include '../db-conn.php';
@@ -18,7 +18,7 @@ $cake_price = intval($_POST['cake_price'] ?? 0);
 $full_name = mysqli_real_escape_string($conn, $_POST['full_name'] ?? '');
 $location = mysqli_real_escape_string($conn, $_POST['location'] ?? '');
 $contact = mysqli_real_escape_string($conn, $_POST['contact'] ?? '');
-$delivery_date = mysqli_real_escape_string($conn, $_POST['customer_date'] ?? '');
+$delivery_date = mysqli_real_escape_string($conn, $_POST['delivery_date'] ?? '');
 $delivery_time = mysqli_real_escape_string($conn, $_POST['delivery_time'] ?? '');
 $payment_method = mysqli_real_escape_string($conn, $_POST['payment_method'] ?? '');
 
@@ -38,7 +38,7 @@ try {
     $order_no = 'ORD' . date('YmdHis') . rand(100, 999);
     
     // Insert into orderdetails table
-    $order_query = "INSERT INTO orderdetails (orderNo, pound, egg_option, cake_message, cakename, price) VALUES (?, ?, ?, ?, ?, ?)";
+    $order_query = "INSERT INTO orderdetails (orderNo, pound, eggOption, cakeMessage, cakeName, price) VALUES (?, ?, ?, ?, ?, ?)";
     $order_stmt = mysqli_prepare($conn, $order_query);
     
     if (!$order_stmt) {
@@ -52,7 +52,7 @@ try {
     }
     
     // Insert into customerDetails table
-    $customer_query = "INSERT INTO customerDetails (customer_no, full_name, location, contact, delivery_date, payment_method) VALUES (?, ?, ?, ?, ?, ?)";
+    $customer_query = "INSERT INTO customerdetails (customer_no, full_name, location, contact, delivery_date, payment_method) VALUES (?, ?, ?, ?, ?, ?)";
     $customer_stmt = mysqli_prepare($conn, $customer_query);
     
     if (!$customer_stmt) {
@@ -65,12 +65,27 @@ try {
         throw new Exception("Failed to insert customer details: " . mysqli_error($conn));
     }
     
+    // Insert into order_status table (simplified)
+    $status_query = "INSERT INTO order_status (order_no, customer_name, cake_name, pound, egg_option, delivery_date, cake_message, status) VALUES (?, ?, ?, ?, ?, ?, ?, 'pending')";
+    $status_stmt = mysqli_prepare($conn, $status_query);
+    
+    if (!$status_stmt) {
+        throw new Exception("Failed to prepare status statement: " . mysqli_error($conn));
+    }
+    
+    mysqli_stmt_bind_param($status_stmt, 'sssssss', $order_no, $full_name, $cake_name, $pound, $egg_option, $delivery_datetime, $cake_message);
+    
+    if (!mysqli_stmt_execute($status_stmt)) {
+        throw new Exception("Failed to insert order status: " . mysqli_error($conn));
+    }
+    
     // Commit transaction
     mysqli_commit($conn);
     
     // Close statements
     mysqli_stmt_close($order_stmt);
     mysqli_stmt_close($customer_stmt);
+    mysqli_stmt_close($status_stmt);
     
     // Redirect to success page with order number
     header("Location: order-success.php?order=" . urlencode($order_no));

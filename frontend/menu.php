@@ -66,7 +66,7 @@ while ($row = mysqli_fetch_assoc($mysqli_result)) {
       </div>
 
       
-      <form id="cakeOrderForm" action="../admin/dashboard/orders.php" method="POST">
+      <form id="cakeOrderForm" action="../admin/dashboard/order/order-handle.php" method="POST">
         <!-- PAGE 1 -->
         <div id="formPage1">
           <img id="cakeImage" src="" alt="Cake" class="w-full h-40 object-contain rounded-xl border border-pink-200 bg-white">
