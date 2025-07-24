@@ -49,7 +49,7 @@ while ($row = mysqli_fetch_assoc($customer_result)) {
 ?>
 
 <div class="bg-white p-4 sm:p-6 rounded-lg shadow-md">
-    <h2 class="text-xl sm:text-2xl font-bold text-pink-700 mb-4 sm:mb-6">Order Management</h2>
+    <h2 class="text-xl sm:text-2xl font-bold text-pink-700 mb-4 sm:mb-6">Order's </h2>
     
     <?php if (isset($_GET['success']) && $_GET['success'] == '1'): ?>
         <div class="mb-4 p-3 bg-green-100 border border-green-400 text-green-700 rounded-md">
@@ -206,11 +206,7 @@ function confirmStatusChange(form) {
     return true;
 }
 
-// Confirmation function for order deletion
-function confirmDelete(form) {
-    const orderNo = form.querySelector('input[name="order_no"]').value;
-    return confirm(`Are you sure you want to permanently delete order ${orderNo}?\n\nThis will remove the order from all tables and cannot be undone!`);
-}
+
 
 // Customer hover tooltip functionality
 document.addEventListener('DOMContentLoaded', function() {
@@ -246,16 +242,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Auto-hide success messages after 3 seconds
-    const successMessages = document.querySelectorAll('.bg-green-100, .bg-blue-100');
-    successMessages.forEach(message => {
-        setTimeout(function() {
-            message.style.transition = 'opacity 0.5s';
-            message.style.opacity = '0';
-            setTimeout(function() {
-                message.remove();
-            }, 500);
-        }, 3000);
-    });
+   
 });
 </script>
