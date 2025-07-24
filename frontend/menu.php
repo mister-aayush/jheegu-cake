@@ -26,27 +26,25 @@ while ($row = mysqli_fetch_assoc($mysqli_result)) {
   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 items-start">
     <?php if (count($datas) > 0): ?>
       <?php foreach ($datas as $item): ?>
-        <div class="bg-white rounded-2xl shadow-xl hover:0shadow-2xl transition-shadow duration-300 p-6 flex flex-col justify-between">
+        <div class="bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-shadow duration-300 p-6 flex flex-col justify-between">
           <img
-            src="http://localhost:8080/Jheegu-Cake/admin/dashboard/<?php echo $item['image-url']; ?>"
-            alt="<?php echo $item['item-name']; ?>"
+            src="http://localhost:8080/Jheegu-Cake/admin/dashboard/<?php echo htmlspecialchars($item['image-url']); ?>"
+            alt="<?php echo htmlspecialchars($item['item-name']); ?>"
             class="w-full h-40 object-contain rounded-xl border border-pink-200 bg-white" />
 
-          <h4 class="text-2xl font-bold text-pink-700 mb-2"><?php echo $item['item-name']; ?></h4>
+          <h4 class="text-2xl font-bold text-pink-700 mb-2"><?php echo htmlspecialchars($item['item-name']); ?></h4>
 
           <div class="text-xl font-medium text-pink-800 mb-3">
-            Rs.<?php echo $item['price'] ?>
+            Rs.<?php echo htmlspecialchars($item['price']); ?>
           </div>
 
           <button
-            onclick="openOrderPopup(
-              '<?php echo $item['id']; ?>',
-              '<?php echo $item['item-name']; ?>',
-              '<?php echo $item['price']; ?>',
-              '<?php echo $item['description']; ?>',
-              'http://localhost:8080/Jheegu-Cake/admin/dashboard/<?php echo $item['image-url']; ?>'
-            )"
-            class="mt-auto inline-block bg-pink-700 text-white text-center px-6 py-2 rounded-full hover:bg-pink-600 hover:scale-105 transition-transform duration-300">
+            class="order-btn mt-auto inline-block bg-pink-700 text-white text-center px-6 py-2 rounded-full hover:bg-pink-600 hover:scale-105 transition-transform duration-300"
+            data-id="<?php echo $item['id']; ?>"
+            data-name="<?php echo htmlspecialchars($item['item-name']); ?>"
+            data-price="<?php echo $item['price']; ?>"
+            data-description="<?php echo htmlspecialchars($item['description']); ?>"
+            data-image="http://localhost:8080/Jheegu-Cake/admin/dashboard/<?php echo htmlspecialchars($item['image-url']); ?>">
             Order Now
           </button>
         </div>
@@ -144,6 +142,22 @@ while ($row = mysqli_fetch_assoc($mysqli_result)) {
 
 <script>
   let basePrice = 0;
+
+  // Add event listeners to all order buttons
+  document.addEventListener('DOMContentLoaded', function() {
+    const orderButtons = document.querySelectorAll('.order-btn');
+    orderButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        const id = this.getAttribute('data-id');
+        const name = this.getAttribute('data-name');
+        const price = this.getAttribute('data-price');
+        const description = this.getAttribute('data-description');
+        const imageUrl = this.getAttribute('data-image');
+        
+        openOrderPopup(id, name, price, description, imageUrl);
+      });
+    });
+  });
 
   function openOrderPopup(id, name, price, description, imageUrl) {
     document.getElementById('cakeOrder').classList.remove('hidden');
