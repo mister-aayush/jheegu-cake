@@ -44,7 +44,7 @@ while ($row = mysqli_fetch_assoc($mysqli_result)) {
               '<?php echo $item['item-name']; ?>',
               '<?php echo $item['price']; ?>',
               '<?php echo $item['description']; ?>',
-              'http://localhost:8080/Jheegu-Cake/admin/dashboard/<?php echo $iteem['image-url']; ?>'
+              'http://localhost:8080/Jheegu-Cake/admin/dashboard/<?php echo $item['image-url']; ?>'
             )"
             class="mt-auto inline-block bg-pink-700 text-white text-center px-6 py-2 rounded-full hover:bg-pink-600 hover:scale-105 transition-transform duration-300">
             Order Now
@@ -122,6 +122,9 @@ while ($row = mysqli_fetch_assoc($mysqli_result)) {
           <label class="block text-sm font-medium text-gray-700 mb-1">Contact Number:</label>
           <input type="text" name="contact" required class="w-full border rounded px-3 py-2 mb-4">
 
+          <label class="block text-sm font-medium text-gray-700 mb-1">Delivery date:</label>
+          <input type="date" name="customer_date" required class="w-full border rounded px-3 py-2 mb-4">
+
           <label class="block text-sm font-medium text-gray-700 mb-1">Payment Method:</label>
           <select name="payment_method" required class="w-full border rounded px-3 py-2 mb-6">
             <option value="COD">Cash on Delivery</option>
@@ -184,9 +187,4 @@ while ($row = mysqli_fetch_assoc($mysqli_result)) {
     document.getElementById('formPage1').classList.remove('hidden');
   }
 
-  // function orderSuccessMsg(){
-  //       if(){
-  //         document.getElementById('orderSuccessMsg').classList.remove('hidden');
-  //       }
-  // }
 </script>
