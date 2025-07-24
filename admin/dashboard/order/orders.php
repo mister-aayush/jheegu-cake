@@ -12,13 +12,12 @@ if($conn == false){
     echo "Connection Failed";
 } 
 
-
 // Handle status update
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_status'])) {
     $order_no = $_POST['order_no'];
     $new_status = $_POST['status'];
     
-    $update_query = "UPDATE order_status SET status = ?, updated_at = NOW() WHERE order_no = ?";
+    $update_query = "UPDATE order_status SET status = ? WHERE order_no = ?";
     $update_stmt = mysqli_prepare($conn, $update_query);
     mysqli_stmt_bind_param($update_stmt, 'ss', $new_status, $order_no);
     mysqli_stmt_execute($update_stmt);
@@ -26,8 +25,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_status'])) {
     echo "<script>alert('Order status updated successfully!'); window.location.reload();</script>";
 }
 
-// Fetch all orders from order_status table
-$query = "SELECT * FROM order_status ORDER BY created_at DESC";
+// Fetch all orders from order_status table - removed ORDER BY created_at since column doesn't exist
+$query = "SELECT * FROM order_status ORDER BY order_no DESC";
 $stmt = mysqli_prepare($conn, $query);
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
@@ -52,13 +51,31 @@ while ($row = mysqli_fetch_assoc($customer_result)) {
 <div class="bg-white p-4 sm:p-6 rounded-lg shadow-md">
     <h2 class="text-xl sm:text-2xl font-bold text-pink-700 mb-4 sm:mb-6">Order Management</h2>
     
+    <?php if (isset($_GET['success']) && $_GET['success'] == '1'): ?>
+        <div class="mb-4 p-3 bg-green-100 border border-green-400 text-green-700 rounded-md">
+            <p class="text-sm">Order status updated successfully!</p>
+        </div>
+    <?php endif; ?>
+    
+    <?php if (isset($_GET['bulk_deleted'])): ?>
+        <div class="mb-4 p-3 bg-blue-100 border border-blue-400 text-blue-700 rounded-md">
+            <p class="text-sm"><?php echo $_GET['bulk_deleted']; ?> completed orders deleted successfully!</p>
+        </div>
+    <?php endif; ?>
+    
+    <?php if (isset($error_message)): ?>
+        <div class="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded-md">
+            <p class="text-sm"><?php echo htmlspecialchars($error_message); ?></p>
+        </div>
+    <?php endif; ?>
+    
     <?php if (empty($orders)): ?>
         <div class="text-center py-8">
             <p class="text-gray-500 text-lg">No orders found.</p>
         </div>
     <?php else: ?>
         <!-- Desktop Table -->
-        <div class="hidden lg:block overflow-x-auto">
+        <div class="overflow-x-auto">
             <table class="min-w-full bg-white border border-gray-200 rounded-lg">
                 <thead class="bg-pink-100">
                     <tr>
@@ -77,10 +94,6 @@ while ($row = mysqli_fetch_assoc($customer_result)) {
                         <tr class="hover:bg-gray-50 border-b">
                             <td class="px-4 py-3 text-sm">
                                 <span class="font-medium text-pink-600"><?php echo htmlspecialchars($order['order_no']); ?></span>
-                                <br>
-                                <span class="text-xs text-gray-500">
-                                    <?php echo date('M d, Y H:i', strtotime($order['created_at'])); ?>
-                                </span>
                             </td>
                             
                             <td class="px-4 py-3 text-sm relative">
@@ -123,14 +136,15 @@ while ($row = mysqli_fetch_assoc($customer_result)) {
                             </td>
                             
                             <td class="px-4 py-3 text-sm">
-                                <form method="POST" class="inline-block">
+                                <form method="POST" class="inline-block" onsubmit="return confirmStatusChange(this)">
                                     <input type="hidden" name="order_no" value="<?php echo htmlspecialchars($order['order_no']); ?>">
                                     <select name="status" class="text-xs border rounded px-2 py-1 bg-white
                                         <?php 
                                         echo $order['status'] === 'done' ? 'text-green-700 border-green-300' : 
-                                             ($order['status'] === 'pending' ? 'text-yellow-700 border-yellow-300' : 'text-blue-700 border-blue-300');
+                                             ($order['status'] === 'pending' ? 'text-yellow-700 border-yellow-300' : 
+                                             ($order['status'] === 'cancelled' ? 'text-red-700 border-red-300' : 'text-blue-700 border-blue-300'));
                                         ?>" 
-                                        onchange="this.form.submit()">
+                                        onchange="this.form.submit()" data-original="<?php echo $order['status']; ?>">
                                         <option value="pending" <?php echo $order['status'] === 'pending' ? 'selected' : ''; ?>>Pending</option>
                                         <option value="processing" <?php echo $order['status'] === 'processing' ? 'selected' : ''; ?>>Processing</option>
                                         <option value="done" <?php echo $order['status'] === 'done' ? 'selected' : ''; ?>>Done</option>
@@ -141,120 +155,63 @@ while ($row = mysqli_fetch_assoc($customer_result)) {
                             </td>
                         </tr>
                     <?php endforeach; ?>
+                    
+                    <!-- Totals Row -->
+                    <?php
+                    $total_orders = count($orders);
+                    $pending_orders = count(array_filter($orders, function($order) { return $order['status'] === 'pending'; }));
+                    $processing_orders = count(array_filter($orders, function($order) { return $order['status'] === 'processing'; }));
+                    $done_orders = count(array_filter($orders, function($order) { return $order['status'] === 'done'; }));
+                    $cancelled_orders = count(array_filter($orders, function($order) { return $order['status'] === 'cancelled'; }));
+                    ?>
+                    <tr class="bg-pink-50 border-t-2 border-pink-200 font-semibold">
+                        <td class="px-4 py-3 text-sm font-bold text-pink-800">TOTALS</td>
+                        <td class="px-4 py-3 text-sm text-blue-600"><?php echo $total_orders; ?> Total</td>
+                        <td class="px-4 py-3 text-sm text-gray-600">-</td>
+                        <td class="px-4 py-3 text-sm text-gray-600">-</td>
+                        <td class="px-4 py-3 text-sm text-gray-600">-</td>
+                        <td class="px-4 py-3 text-sm text-gray-600">-</td>
+                        <td class="px-4 py-3 text-sm text-gray-600">-</td>
+                        <td class="px-4 py-3 text-sm">
+                            <div class="flex flex-wrap gap-1 text-xs">
+                                <span class="bg-yellow-100 text-yellow-700 px-2 py-1 rounded"><?php echo $pending_orders; ?> Pending</span>
+                                <span class="bg-blue-100 text-blue-700 px-2 py-1 rounded"><?php echo $processing_orders; ?> Processing</span>
+                                <span class="bg-green-100 text-green-700 px-2 py-1 rounded"><?php echo $done_orders; ?> Done</span>
+                                <span class="bg-red-100 text-red-700 px-2 py-1 rounded"><?php echo $cancelled_orders; ?> Cancelled</span>
+                            </div>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
-        
-        <!-- Mobile Cards -->
-        <div class="lg:hidden space-y-4">
-            <?php foreach ($orders as $order): ?>
-                <div class="bg-white border border-gray-200 rounded-lg p-4 shadow-sm">
-                    <div class="flex justify-between items-start mb-3">
-                        <div>
-                            <span class="font-medium text-pink-600 text-sm"><?php echo htmlspecialchars($order['order_no']); ?></span>
-                            <br>
-                            <span class="text-xs text-gray-500">
-                                <?php echo date('M d, Y H:i', strtotime($order['created_at'])); ?>
-                            </span>
-                        </div>
-                        
-                        <form method="POST" class="inline-block">
-                            <input type="hidden" name="order_no" value="<?php echo htmlspecialchars($order['order_no']); ?>">
-                            <select name="status" class="text-xs border rounded px-2 py-1 bg-white
-                                <?php 
-                                echo $order['status'] === 'done' ? 'text-green-700 border-green-300' : 
-                                     ($order['status'] === 'pending' ? 'text-yellow-700 border-yellow-300' : 'text-blue-700 border-blue-300');
-                                ?>" 
-                                onchange="this.form.submit()">
-                                <option value="pending" <?php echo $order['status'] === 'pending' ? 'selected' : ''; ?>>Pending</option>
-                                <option value="processing" <?php echo $order['status'] === 'processing' ? 'selected' : ''; ?>>Processing</option>
-                                <option value="done" <?php echo $order['status'] === 'done' ? 'selected' : ''; ?>>Done</option>
-                                <option value="cancelled" <?php echo $order['status'] === 'cancelled' ? 'selected' : ''; ?>>Cancelled</option>
-                            </select>
-                            <input type="hidden" name="update_status" value="1">
-                        </form>
-                    </div>
-                    
-                    <div class="space-y-2 text-sm">
-                        <div class="flex justify-between">
-                            <span class="font-medium">Customer:</span>
-                            <span class="customer-hover cursor-pointer text-blue-600 hover:underline"
-                                  data-order="<?php echo htmlspecialchars($order['order_no']); ?>">
-                                <?php echo htmlspecialchars($order['customer_name']); ?>
-                            </span>
-                        </div>
-                        
-                        <div class="flex justify-between">
-                            <span class="font-medium">Cake:</span>
-                            <span><?php echo htmlspecialchars($order['cake_name']); ?></span>
-                        </div>
-                        
-                        <div class="flex justify-between">
-                            <span class="font-medium">Size:</span>
-                            <span><?php echo $order['pound']; ?> lb - <?php echo htmlspecialchars($order['egg_option']); ?></span>
-                        </div>
-                        
-                        <div class="flex justify-between">
-                            <span class="font-medium">Delivery:</span>
-                            <span><?php echo date('M d, Y H:i A', strtotime($order['delivery_date'])); ?></span>
-                        </div>
-                        
-                        <?php if (!empty($order['cake_message'])): ?>
-                            <div class="flex justify-between">
-                                <span class="font-medium">Message:</span>
-                                <span class="text-blue-600 italic text-xs">"<?php echo htmlspecialchars($order['cake_message']); ?>"</span>
-                            </div>
-                        <?php endif; ?>
-                    </div>
-                    
-                    <!-- Mobile Tooltip -->
-                    <div class="customer-tooltip hidden mt-3 p-3 bg-gray-100 rounded-lg border">
-                        <?php if (isset($customers[$order['order_no']])): ?>
-                            <div class="text-sm space-y-1">
-                                <div><strong>Name:</strong> <?php echo htmlspecialchars($customers[$order['order_no']]['full_name']); ?></div>
-                                <div><strong>Location:</strong> <?php echo htmlspecialchars($customers[$order['order_no']]['location']); ?></div>
-                                <div><strong>Contact:</strong> <?php echo htmlspecialchars($customers[$order['order_no']]['contact']); ?></div>
-                                <div><strong>Payment:</strong> <?php echo htmlspecialchars($customers[$order['order_no']]['payment_method']); ?></div>
-                            </div>
-                        <?php endif; ?>
-                    </div>
-                </div>
-            <?php endforeach; ?>
-        </div>
-        
-        <!-- Summary Stats -->
-        <div class="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4">
-            <?php
-            $total_orders = count($orders);
-            $pending_orders = count(array_filter($orders, function($order) { return $order['status'] === 'pending'; }));
-            $done_orders = count(array_filter($orders, function($order) { return $order['status'] === 'done'; }));
-            $processing_orders = count(array_filter($orders, function($order) { return $order['status'] === 'processing'; }));
-            ?>
-            
-            <div class="bg-blue-50 p-3 sm:p-4 rounded-lg text-center">
-                <div class="text-xl sm:text-2xl font-bold text-blue-600"><?php echo $total_orders; ?></div>
-                <div class="text-xs sm:text-sm text-blue-600">Total Orders</div>
-            </div>
-            
-            <div class="bg-yellow-50 p-3 sm:p-4 rounded-lg text-center">
-                <div class="text-xl sm:text-2xl font-bold text-yellow-600"><?php echo $pending_orders; ?></div>
-                <div class="text-xs sm:text-sm text-yellow-600">Pending</div>
-            </div>
-            
-            <div class="bg-blue-50 p-3 sm:p-4 rounded-lg text-center">
-                <div class="text-xl sm:text-2xl font-bold text-blue-600"><?php echo $processing_orders; ?></div>
-                <div class="text-xs sm:text-sm text-blue-600">Processing</div>
-            </div>
-            
-            <div class="bg-green-50 p-3 sm:p-4 rounded-lg text-center">
-                <div class="text-xl sm:text-2xl font-bold text-green-600"><?php echo $done_orders; ?></div>
-                <div class="text-xs sm:text-sm text-green-600">Done</div>
-            </div>
-        </div>
+    
     <?php endif; ?>
 </div>
 
 <script>
+// Confirmation function for status changes
+function confirmStatusChange(form) {
+    const select = form.querySelector('select[name="status"]');
+    const newStatus = select.value;
+    const originalStatus = select.getAttribute('data-original');
+    
+    if (newStatus === 'cancelled' && originalStatus !== 'cancelled') {
+        return confirm('Are you sure you want to cancel this order? This action should be carefully considered.');
+    }
+    
+    if (newStatus === 'done' && originalStatus !== 'done') {
+        return confirm('Mark this order as completed?');
+    }
+    
+    return true;
+}
+
+// Confirmation function for order deletion
+function confirmDelete(form) {
+    const orderNo = form.querySelector('input[name="order_no"]').value;
+    return confirm(`Are you sure you want to permanently delete order ${orderNo}?\n\nThis will remove the order from all tables and cannot be undone!`);
+}
+
 // Customer hover tooltip functionality
 document.addEventListener('DOMContentLoaded', function() {
     const customerHovers = document.querySelectorAll('.customer-hover');
@@ -287,6 +244,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 tooltip.classList.add('hidden');
             });
         }
+    });
+    
+    // Auto-hide success messages after 3 seconds
+    const successMessages = document.querySelectorAll('.bg-green-100, .bg-blue-100');
+    successMessages.forEach(message => {
+        setTimeout(function() {
+            message.style.transition = 'opacity 0.5s';
+            message.style.opacity = '0';
+            setTimeout(function() {
+                message.remove();
+            }, 500);
+        }, 3000);
     });
 });
 </script>

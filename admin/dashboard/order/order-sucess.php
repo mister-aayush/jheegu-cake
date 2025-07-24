@@ -1,7 +1,7 @@
 <?php
 $order_no = $_GET['order'] ?? '';
 if (empty($order_no)) {
-    header('Location: ../../frontend/index.php');
+    header('Location: ../../../frontend/index.php');
     exit();
 }
 ?>
@@ -12,7 +12,7 @@ if (empty($order_no)) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order Successful - Jheegu Cake</title>
-    <link rel="stylesheet" href="../src/output.css">
+    <link rel="stylesheet" href="../../src/output.css">
 </head>
 <body class="bg-pink-50 min-h-screen flex items-center justify-center px-4">
     
@@ -54,7 +54,7 @@ if (empty($order_no)) {
 
         <!-- Action Buttons -->
         <div class="space-y-3">
-            <a href="../../frontend/index.php" 
+            <a href="../../../frontend/index.php" 
                class="w-full inline-block bg-pink-600 text-white py-3 px-6 rounded-md hover:bg-pink-700 transition duration-200">
                 Continue Shopping
             </a>
@@ -79,7 +79,7 @@ if (empty($order_no)) {
         // Auto-redirect after 5 minutes (optional)
         setTimeout(function() {
             if (confirm('Would you like to return to the homepage?')) {
-                window.location.href = '../../frontend/index.php';
+                window.location.href = '../../../frontend/index.php';
             }
         }, 300000); // 5 minutes
     </script>

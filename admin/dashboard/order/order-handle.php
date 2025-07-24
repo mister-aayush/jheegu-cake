@@ -1,7 +1,7 @@
 <?php
 // Check if form was submitted via POST
 if ($_SERVER['REQUEST_METHOD'] != 'POST') {
-    header('Location: ../../frontend/index.php');
+    header('Location: ../../../frontend/index.php');
     exit();
 }
 
@@ -87,7 +87,7 @@ try {
     mysqli_stmt_close($customer_stmt);
     mysqli_stmt_close($status_stmt);
     
-    // Redirect to success page with order number
+    // Redirect to success page with order number - FIXED PATH
     header("Location: order-success.php?order=" . urlencode($order_no));
     exit();
     
@@ -99,7 +99,7 @@ try {
     error_log("Order processing error: " . $e->getMessage());
     
     // Redirect back with error
-    header("Location: ../../frontend/index.php?error=" . urlencode("Failed to process order. Please try again."));
+    header("Location: ../../../frontend/index.php?error=" . urlencode("Failed to process order. Please try again."));
     exit();
 }
 
