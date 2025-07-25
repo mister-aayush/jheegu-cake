@@ -30,11 +30,10 @@ if (empty($cake_name) || empty($full_name) || empty($location) || empty($contact
     die('Please fill in all required fields.');
 }
 
-// Start transaction
 mysqli_autocommit($conn, false);
 
 try {
-    // Generate unique order number
+    // unique order number
     $order_no = 'ORD' . date('YmdHis') . rand(100, 999);
     
     // Insert into orderdetails table
