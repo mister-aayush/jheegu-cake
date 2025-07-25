@@ -102,17 +102,7 @@ while ($row = mysqli_fetch_assoc($customer_result)) {
                                     <?php echo htmlspecialchars($order['customer_name']); ?>
                                 </div>
                                 
-                                <!-- Tooltip -->
-                                <div class="customer-tooltip hidden absolute z-10 bg-gray-800 text-white p-3 rounded-lg shadow-lg left-0 top-full mt-1 w-64">
-                                    <?php if (isset($customers[$order['order_no']])): ?>
-                                        <div class="text-sm space-y-1">
-                                            <div><strong>Name:</strong> <?php echo htmlspecialchars($customers[$order['order_no']]['full_name']); ?></div>
-                                            <div><strong>Location:</strong> <?php echo htmlspecialchars($customers[$order['order_no']]['location']); ?></div>
-                                            <div><strong>Contact:</strong> <?php echo htmlspecialchars($customers[$order['order_no']]['contact']); ?></div>
-                                            <div><strong>Payment:</strong> <?php echo htmlspecialchars($customers[$order['order_no']]['payment_method']); ?></div>
-                                        </div>
-                                    <?php endif; ?>
-                                </div>
+                               
                             </td>
                             
                             <td class="px-4 py-3 text-sm font-medium"><?php echo htmlspecialchars($order['cake_name']); ?></td>
@@ -208,40 +198,4 @@ function confirmStatusChange(form) {
 
 
 
-// Customer hover tooltip functionality
-document.addEventListener('DOMContentLoaded', function() {
-    const customerHovers = document.querySelectorAll('.customer-hover');
-    
-    customerHovers.forEach(hover => {
-        const tooltip = hover.parentElement.querySelector('.customer-tooltip') || 
-                       hover.closest('.bg-white').querySelector('.customer-tooltip');
-        
-        if (tooltip) {
-            hover.addEventListener('mouseenter', function() {
-                tooltip.classList.remove('hidden');
-            });
-            
-            hover.addEventListener('mouseleave', function() {
-                tooltip.classList.add('hidden');
-            });
-            
-            // For mobile - toggle on click
-            hover.addEventListener('click', function(e) {
-                e.preventDefault();
-                tooltip.classList.toggle('hidden');
-            });
-        }
-    });
-    
-    // Hide tooltips when clicking elsewhere
-    document.addEventListener('click', function(e) {
-        if (!e.target.closest('.customer-hover')) {
-            document.querySelectorAll('.customer-tooltip').forEach(tooltip => {
-                tooltip.classList.add('hidden');
-            });
-        }
-    });
-    
-   
-});
 </script>
