@@ -87,7 +87,7 @@ try {
     mysqli_stmt_close($status_stmt);
     
     // Redirect to success page with order number - FIXED PATH
-    header("Location: order-success.php?order=" . urlencode($order_no));
+    header("Location: order-sucess.php?order=" . urlencode($order_no));
     exit();
     
 } catch (Exception $e) {
