@@ -179,18 +179,17 @@ while ($row = mysqli_fetch_assoc($customer_result)) {
 </div>
 
 <script>
-// Confirmation function for status changes
 function confirmStatusChange(form) {
     const select = form.querySelector('select[name="status"]');
     const newStatus = select.value;
     const originalStatus = select.getAttribute('data-original');
     
     if (newStatus === 'cancelled' && originalStatus !== 'cancelled') {
-        return confirm('Are you sure you want to cancel this order? This action should be carefully considered.');
+        return alert('Are you sure you want to cancel this order? This action should be carefully considered.');
     }
     
     if (newStatus === 'done' && originalStatus !== 'done') {
-        return confirm('Mark this order as completed?');
+        return alert('Mark this order as completed?');
     }
     
     return true;
