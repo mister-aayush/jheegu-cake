@@ -1,9 +1,15 @@
 <?php
+// echo "<pre>";
+
+// var_dump($_POST);
+// echo "</pre>";
+// die;
 // Check if form was submitted via POST
 if ($_SERVER['REQUEST_METHOD'] != 'POST') {
     header('Location: ../../../frontend/index.php');
     exit();
 }
+
 
 // Include database connection
 include '../../db-conn.php';
