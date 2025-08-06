@@ -40,7 +40,7 @@ mysqli_autocommit($conn, false);
 
 try {
     // unique order number
-    $order_no = 'ORD' . date('YmdHis') . rand(100, 999);
+    $order_no = 'ORD' . date('YmdHis') . rand(100, 9982);
     
     // Insert into orderdetails table
     $order_query = "INSERT INTO orderdetails (orderNo, pound, eggOption, cakeMessage, cakeName, price) VALUES (?, ?, ?, ?, ?, ?)";

@@ -65,6 +65,6 @@ while ($row = mysqli_fetch_assoc($mysqli_result)) {
     </table>
   </div>
 <?php else: ?>
-  <p class="text-gray-500 text-sm mt-4 text-center">No menu items found.</p>
+  <p class="text-gray-500 text-sm mt-4 text-center">NO items found!!!</p>
 <?php endif; ?>
 
